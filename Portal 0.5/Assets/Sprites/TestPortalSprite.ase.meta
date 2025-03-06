@@ -202,7 +202,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 52, y: 4}
   spriteSheetImportData:
-  - name: OrangeLeft
+  - name: OrangeRight
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -222,7 +222,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: OrangeRight
+  - name: OrangeLeft
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -242,7 +242,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: BlueLeft
+  - name: BlueRight
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -262,7 +262,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: BlueRight
+  - name: BlueLeft
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0

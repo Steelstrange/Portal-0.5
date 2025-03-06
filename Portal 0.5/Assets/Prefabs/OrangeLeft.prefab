@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5757694468855143953}
   - component: {fileID: 9152569384831154974}
-  - component: {fileID: 67024597174763422}
+  - component: {fileID: 4340620553484210324}
+  - component: {fileID: 7396364629015630422}
   m_Layer: 0
-  m_Name: OrangeRight
-  m_TagString: Untagged
+  m_Name: OrangeLeft
+  m_TagString: OrangePortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +27,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547529638959144789}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.89, y: -2.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 0.93, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,13 +86,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &67024597174763422
-CapsuleCollider:
+--- !u!70 &4340620553484210324
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547529638959144789}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -100,11 +103,36 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02225991, y: 0}
+  m_Size: {x: 0.10109602, y: 2.18}
+  m_Direction: 0
+--- !u!114 &7396364629015630422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547529638959144789}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.121118784
-  m_Height: 2.299674
-  m_Direction: 1
-  m_Center: {x: 0.00000023841858, y: 0.0035197735, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ce426f18dafb540b70d135ac979ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBlue: 1
+  IsVert: 0
+  Direction: 
