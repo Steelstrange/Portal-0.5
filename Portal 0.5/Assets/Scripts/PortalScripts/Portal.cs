@@ -14,9 +14,9 @@ public class Portal : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        print("Collided with something");
-        if(other.gameObject.tag != "NoTeleport")
+        if(other.gameObject.tag != "NoTeleport" && other.gameObject.tag != "Ground")
         {
+            print("Collided with something");
             Portal OtherPortal = null;
             //if blue, find orange
             if(IsBlue)
@@ -30,16 +30,21 @@ public class Portal : MonoBehaviour
             }
 
             //teleport to the transform of the other portal
-            StartCoroutine(NoTele(other.tag, other.gameObject));
+            other.tag = "NoTeleport";
+            StartCoroutine(NoTele(other.tag, other.gameObject)); 
+
 
             //three types of possible transitions:
             //normal; just change position, dont need to mess with velocity
             //opposite; Reverse our momentum
-            //perpendicular; flip the y and x momentum
+            //perpendicular; flip the y an d x momentum
             string TpType = FindTpType(OtherPortal);
-            
+            print(TpType);
+            print(OtherPortal.name);
+
             //find the vector between the center of the portal and whatever is teleporting
             Vector2 Offset = transform.position - other.transform.position;
+            print(Offset);
 
             if(TpType == "Normal")
             {
@@ -67,15 +72,14 @@ public class Portal : MonoBehaviour
 
     IEnumerator NoTele(string OGtag, GameObject other)
     {
-        other.tag = "NoTeleport";
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(1f);
         other.tag = OGtag;
     }
 
     public string FindTpType(Portal other)
     {
         string r = null;
-        if (other.Direction == "Left" && Direction == "Right" || other.Direction == "Right" && Direction == "Left")
+        if (other.Direction == "Left" && Direction == "Right" || other.Direction == "Right" && Direction == "Left" || other.Direction == "Up" && Direction == "Down" || other.Direction == "Down" && Direction == "Up")
             r = "Normal";
 
         else if (other.Direction == Direction)
