@@ -30,7 +30,6 @@ public class Portal : MonoBehaviour
             }
 
             //teleport to the transform of the other portal
-            other.tag = "NoTeleport";
             StartCoroutine(NoTele(other.tag, other.gameObject)); 
 
 
@@ -39,12 +38,12 @@ public class Portal : MonoBehaviour
             //opposite; Reverse our momentum
             //perpendicular; flip the y an d x momentum
             string TpType = FindTpType(OtherPortal);
-            print(TpType);
-            print(OtherPortal.name);
+            //print(TpType);
+            //print(OtherPortal.name);
 
             //find the vector between the center of the portal and whatever is teleporting
             Vector2 Offset = transform.position - other.transform.position;
-            print(Offset);
+            //print(Offset);
 
             if(TpType == "Normal")
             {
@@ -52,7 +51,7 @@ public class Portal : MonoBehaviour
                 other.transform.position -=  (Vector3) new Vector2(-Offset.x, Offset.y);
             }
 
-            else if(TpType == "Oppposite")
+            else if(TpType == "Opposite")
             {
                 other.transform.position = OtherPortal.transform.position;
                 other.transform.position -= (Vector3)new Vector2(-Offset.x, Offset.y);
@@ -72,7 +71,8 @@ public class Portal : MonoBehaviour
 
     IEnumerator NoTele(string OGtag, GameObject other)
     {
-        yield return new WaitForSeconds(1f);
+        other.tag = "NoTeleport";
+        yield return new WaitForSeconds(.3f);
         other.tag = OGtag;
     }
 
