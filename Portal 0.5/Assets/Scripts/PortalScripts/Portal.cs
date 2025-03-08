@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
     #endregion
 
 
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerStay2D(Collider2D other)
     {
         if(other.gameObject.tag != "NoTeleport" && other.gameObject.tag != "Ground")
         {
@@ -54,7 +54,7 @@ public class Portal : MonoBehaviour
             else if(TpType == "Opposite")
             {
                 other.transform.position = OtherPortal.transform.position;
-                other.transform.position -= (Vector3)new Vector2(-Offset.x, Offset.y);
+                other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
 
                 if (!IsVert)
                     other.GetComponent<Rigidbody2D>().velocity = new Vector2(-other.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<Rigidbody2D>().velocity.y);
@@ -72,7 +72,7 @@ public class Portal : MonoBehaviour
     IEnumerator NoTele(string OGtag, GameObject other)
     {
         other.tag = "NoTeleport";
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.2f);
         other.tag = OGtag;
     }
 
