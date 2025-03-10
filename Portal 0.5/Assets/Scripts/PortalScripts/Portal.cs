@@ -16,7 +16,7 @@ public class Portal : MonoBehaviour
     {
         if(other.gameObject.tag != "NoTeleport" && other.gameObject.tag != "Ground")
         {
-            print("Collided with something");
+            //print("Collided with something");
             Portal OtherPortal = null;
             //if blue, find orange
             if(IsBlue)
@@ -45,13 +45,23 @@ public class Portal : MonoBehaviour
             Vector2 Offset = transform.position - other.transform.position;
             //print(Offset);
 
-            if(TpType == "Normal")
+            if (TpType == "Normal")
             {
                 other.transform.position = OtherPortal.transform.position;
-                other.transform.position -=  (Vector3) new Vector2(-Offset.x, Offset.y);
+                if (IsVert)
+                { 
+                    other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
+                    other.GetComponent<Rigidbody2D>().velocity += other.GetComponent<PlayerControl>().OldVelocity;
+                }
+                else
+                    other.transform.position -= (Vector3)new Vector2(-Offset.x, Offset.y);
+                if (OtherPortal.Direction == "Down")
+                {
+                    other.transform.position -= (Vector3)new Vector2(0, 1);
+                }
             }
 
-            else if(TpType == "Opposite")
+            else if (TpType == "Opposite")
             {
                 other.transform.position = OtherPortal.transform.position;
                 other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
@@ -62,9 +72,26 @@ public class Portal : MonoBehaviour
                     other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -other.GetComponent<Rigidbody2D>().velocity.y);
             }
 
-            else if(TpType == "Perp")
+            else if (TpType == "Perp")
             {
+                other.transform.position = OtherPortal.transform.position;
+                other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
 
+                if (OtherPortal.IsVert)
+                {
+                    if(OtherPortal.Direction == "Down")
+                        other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), -Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                    else
+                        other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                }
+                else
+                {
+                    if (OtherPortal.Direction == "Right")
+                        other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                    else
+                        other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+
+                }
             }
         }
     }
@@ -78,7 +105,7 @@ public class Portal : MonoBehaviour
 
     public string FindTpType(Portal other)
     {
-        string r = null;
+        string r;
         if (other.Direction == "Left" && Direction == "Right" || other.Direction == "Right" && Direction == "Left" || other.Direction == "Up" && Direction == "Down" || other.Direction == "Down" && Direction == "Up")
             r = "Normal";
 
@@ -89,4 +116,6 @@ public class Portal : MonoBehaviour
             r = "Perp";
         return r;
     }
+
+    
 }

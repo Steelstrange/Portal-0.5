@@ -14,7 +14,15 @@ public class PlayerControl : MonoBehaviour
     private float coyoteTimeCounter;
     public float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
-    public bool Grounded = false;
+    [SerializeField] private float FallMult;
+
+    private float AirTimer;
+    [SerializeField] private float MaxFallSpeed;
+    public Vector2 OldVelocity;
+    
+    public bool Grounded = false;   
+
+
     #endregion
 
     private void Awake()
@@ -24,15 +32,18 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
+        StartCoroutine(OldVelocityUpdater());
         #region Jump
         //coyote time
         if (Grounded)
         {
             coyoteTimeCounter = coyoteTime;
+            AirTimer = 0;
         }
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
+            AirTimer += Time.deltaTime;
         }
 
         //player has a buffer for jumping
@@ -51,6 +62,13 @@ public class PlayerControl : MonoBehaviour
             jumpBufferCounter = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpPower);
         }
+
+        //increase the velocity on the way down
+        if (rb.velocity.y < 0f)
+        {
+            //print(Mathf.Clamp(Mathf.Pow(AirTimer, FallMult), 0, MaxFallSpeed));
+            rb.velocity -= new Vector2(0, Mathf.Clamp(Mathf.Pow(AirTimer, FallMult), 0, MaxFallSpeed));
+        }
         #endregion
     }
 
@@ -64,5 +82,12 @@ public class PlayerControl : MonoBehaviour
         {
             rb.AddForce(new Vector2(-MoveSpeed, 0));
         }
+    }
+
+    IEnumerator OldVelocityUpdater()
+    {
+        yield return null; //wait one frame
+        OldVelocity = rb.velocity;
+        print(OldVelocity);
     }
 }
