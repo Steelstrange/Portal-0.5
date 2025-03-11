@@ -18,11 +18,9 @@ public class PlayerControl : MonoBehaviour
 
     private float AirTimer;
     [SerializeField] private float MaxFallSpeed;
-    public Vector2 OldVelocity;
-    
     public bool Grounded = false;   
 
-
+    [SerializeField] private LayerMask PortalLayer;
     #endregion
 
     private void Awake()
@@ -32,7 +30,6 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        StartCoroutine(OldVelocityUpdater());
         #region Jump
         //coyote time
         if (Grounded)
@@ -62,12 +59,22 @@ public class PlayerControl : MonoBehaviour
             jumpBufferCounter = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpPower);
         }
-
-        //increase the velocity on the way down
-        if (rb.velocity.y < 0f)
+        #endregion
+        #region Better Portaling
+        if(rb.velocity.magnitude > 10)
         {
-            //print(Mathf.Clamp(Mathf.Pow(AirTimer, FallMult), 0, MaxFallSpeed));
-            rb.velocity -= new Vector2(0, Mathf.Clamp(Mathf.Pow(AirTimer, FallMult), 0, MaxFallSpeed));
+            //if we're moving fast enough, cast a ray down and up to check if we're doing the classic portal thing
+            RaycastHit2D Down = Physics2D.Raycast(transform.position, -Vector2.up, 1, PortalLayer);
+            if(Down)
+            {
+                //print("Hell yeah");
+                //print(Down.transform.position);
+                if(Down.distance < .5) //if we're close to the portal downwards, teleport early
+                {
+                    print("Name: " + Down.distance);
+                    Down.transform.gameObject.GetComponent<Portal>().Teleport(gameObject);
+                }
+            }
         }
         #endregion
     }
@@ -82,12 +89,12 @@ public class PlayerControl : MonoBehaviour
         {
             rb.AddForce(new Vector2(-MoveSpeed, 0));
         }
-    }
 
-    IEnumerator OldVelocityUpdater()
-    {
-        yield return null; //wait one frame
-        OldVelocity = rb.velocity;
-        print(OldVelocity);
+        //increase the velocity on the way down
+        if (rb.velocity.y < 0f)
+        {
+            //print(Mathf.Clamp(Mathf.Pow(AirTimer, FallMult), 0, MaxFallSpeed));
+            rb.velocity -= new Vector2(0, Mathf.Clamp(Mathf.Pow(AirTimer, FallMult), 0, MaxFallSpeed));
+        }
     }
 }

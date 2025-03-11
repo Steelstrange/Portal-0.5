@@ -384,6 +384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrangeUp
       objectReference: {fileID: 0}
+    - target: {fileID: 1799897724333318787, guid: 18aa9c380211c8b48919f7e5694a6669, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1802418955947482378, guid: 18aa9c380211c8b48919f7e5694a6669, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -602,7 +606,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &1110158923
 SpriteRenderer:
@@ -689,8 +693,11 @@ MonoBehaviour:
   coyoteTime: 0.2
   jumpBufferTime: 0.2
   FallMult: 1.2
-  MaxFallSpeed: 3
+  MaxFallSpeed: 2.8
   Grounded: 0
+  PortalLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!60 &1110158926
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1092,6 +1099,10 @@ PrefabInstance:
     - target: {fileID: 2147802703311846973, guid: c24a1407526e90149b8c833d94d139d3, type: 3}
       propertyPath: m_Name
       value: BlueDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147802703311846973, guid: c24a1407526e90149b8c833d94d139d3, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6311677616974215454, guid: c24a1407526e90149b8c833d94d139d3, type: 3}
       propertyPath: m_LocalPosition.x

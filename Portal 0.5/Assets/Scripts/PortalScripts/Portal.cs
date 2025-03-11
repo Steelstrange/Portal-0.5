@@ -16,83 +16,7 @@ public class Portal : MonoBehaviour
     {
         if(other.gameObject.tag != "NoTeleport" && other.gameObject.tag != "Ground")
         {
-            //print("Collided with something");
-            Portal OtherPortal = null;
-            //if blue, find orange
-            if(IsBlue)
-            {
-                OtherPortal = GameObject.FindGameObjectWithTag("OrangePortal").GetComponent<Portal>();
-            }
-            //else, if orange, find blue
-            else if(!IsBlue)
-            {
-                OtherPortal = GameObject.FindGameObjectWithTag("BluePortal").GetComponent<Portal>();
-            }
-
-            //teleport to the transform of the other portal
-            StartCoroutine(NoTele(other.tag, other.gameObject)); 
-
-
-            //three types of possible transitions:
-            //normal; just change position, dont need to mess with velocity
-            //opposite; Reverse our momentum
-            //perpendicular; flip the y an d x momentum
-            string TpType = FindTpType(OtherPortal);
-            //print(TpType);
-            //print(OtherPortal.name);
-
-            //find the vector between the center of the portal and whatever is teleporting
-            Vector2 Offset = transform.position - other.transform.position;
-            //print(Offset);
-
-            if (TpType == "Normal")
-            {
-                other.transform.position = OtherPortal.transform.position;
-                if (IsVert)
-                { 
-                    other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
-                    other.GetComponent<Rigidbody2D>().velocity += other.GetComponent<PlayerControl>().OldVelocity;
-                }
-                else
-                    other.transform.position -= (Vector3)new Vector2(-Offset.x, Offset.y);
-                if (OtherPortal.Direction == "Down")
-                {
-                    other.transform.position -= (Vector3)new Vector2(0, 1);
-                }
-            }
-
-            else if (TpType == "Opposite")
-            {
-                other.transform.position = OtherPortal.transform.position;
-                other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
-
-                if (!IsVert)
-                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(-other.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<Rigidbody2D>().velocity.y);
-                else
-                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -other.GetComponent<Rigidbody2D>().velocity.y);
-            }
-
-            else if (TpType == "Perp")
-            {
-                other.transform.position = OtherPortal.transform.position;
-                other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
-
-                if (OtherPortal.IsVert)
-                {
-                    if(OtherPortal.Direction == "Down")
-                        other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), -Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                    else
-                        other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                }
-                else
-                {
-                    if (OtherPortal.Direction == "Right")
-                        other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                    else
-                        other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-
-                }
-            }
+            Teleport(other.gameObject);
         }
     }
 
@@ -117,5 +41,84 @@ public class Portal : MonoBehaviour
         return r;
     }
 
+    public void Teleport(GameObject other)
+    {
+        //print("Collided with something");
+        Portal OtherPortal = null;
+        //if blue, find orange
+        if (IsBlue)
+        {
+            OtherPortal = GameObject.FindGameObjectWithTag("OrangePortal").GetComponent<Portal>();
+        }
+        //else, if orange, find blue
+        else if (!IsBlue)
+        {
+            OtherPortal = GameObject.FindGameObjectWithTag("BluePortal").GetComponent<Portal>();
+        }
+
+        //teleport to the transform of the other portal
+        StartCoroutine(NoTele(other.tag, other.gameObject));
+
+
+        //three types of possible transitions:
+        //normal; just change position, dont need to mess with velocity
+        //opposite; Reverse our momentum
+        //perpendicular; flip the y an d x momentum
+        string TpType = FindTpType(OtherPortal);
+        //print(TpType);
+        //print(OtherPortal.name);
+
+        //find the vector between the center of the portal and whatever is teleporting
+        Vector2 Offset = transform.position - other.transform.position;
+        //print(Offset);
+
+        if (TpType == "Normal")
+        {
+            other.transform.position = OtherPortal.transform.position;
+            if (IsVert)
+            {
+                other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
+            }
+            else
+                other.transform.position -= (Vector3)new Vector2(-Offset.x, Offset.y);
+            if (OtherPortal.Direction == "Down")
+            {
+                other.transform.position -= (Vector3)new Vector2(0, 1);
+            }
+        }
+
+        else if (TpType == "Opposite")
+        {
+            other.transform.position = OtherPortal.transform.position;
+            other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
+
+            if (!IsVert)
+                other.GetComponent<Rigidbody2D>().velocity = new Vector2(-other.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<Rigidbody2D>().velocity.y);
+            else
+                other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -other.GetComponent<Rigidbody2D>().velocity.y);
+        }
+
+        else if (TpType == "Perp")
+        {
+            other.transform.position = OtherPortal.transform.position;
+            other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
+
+            if (OtherPortal.IsVert)
+            {
+                if (OtherPortal.Direction == "Down")
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), -Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                else
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+            }
+            else
+            {
+                if (OtherPortal.Direction == "Right")
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                else
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+
+            }
+        }
+    }
     
 }
