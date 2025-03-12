@@ -11,7 +11,6 @@ public class Portal : MonoBehaviour
     public string Direction;
     #endregion
 
-
     public void OnTriggerStay2D(Collider2D other)
     {
         if(other.gameObject.tag != "NoTeleport" && other.gameObject.tag != "Ground")
@@ -43,6 +42,7 @@ public class Portal : MonoBehaviour
 
     public void Teleport(GameObject other)
     {
+        
         //print("Collided with something");
         Portal OtherPortal = null;
         //if blue, find orange
@@ -100,6 +100,10 @@ public class Portal : MonoBehaviour
 
         else if (TpType == "Perp")
         {
+            if (other.name == "Player")
+            {
+                other.GetComponent<PlayerControl>().AirTimer = 0;
+            }
             other.transform.position = OtherPortal.transform.position;
             other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
 
@@ -113,9 +117,9 @@ public class Portal : MonoBehaviour
             else
             {
                 if (OtherPortal.Direction == "Right")
-                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                else
                     other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                else
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
 
             }
         }

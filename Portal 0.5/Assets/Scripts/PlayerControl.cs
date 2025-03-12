@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour
     private float jumpBufferCounter;
     [SerializeField] private float FallMult;
 
-    private float AirTimer;
+    public float AirTimer;
     [SerializeField] private float MaxFallSpeed;
     public bool Grounded = false;   
 
