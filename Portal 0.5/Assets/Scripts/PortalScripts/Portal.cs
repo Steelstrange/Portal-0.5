@@ -103,6 +103,7 @@ public class Portal : MonoBehaviour
             if (other.name == "Player")
             {
                 other.GetComponent<PlayerControl>().AirTimer = 0;
+                StartCoroutine(ResetDrag(other, other.GetComponent<Rigidbody2D>().drag));
             }
             other.transform.position = OtherPortal.transform.position;
             other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
@@ -123,6 +124,13 @@ public class Portal : MonoBehaviour
 
             }
         }
+    }
+
+    IEnumerator ResetDrag(GameObject other, float OGdrag)
+    {
+        other.GetComponent<Rigidbody2D>().drag = 0;
+        yield return new WaitForSeconds(.25f);
+        other.GetComponent<Rigidbody2D>().drag = OGdrag;
     }
     
 }

@@ -6,6 +6,8 @@ public class PlayerControl : MonoBehaviour
 {
     #region Vars
     private Rigidbody2D rb;
+    [SerializeField] private Camera cam;
+    [SerializeField] private GameObject PortalGunPos;
 
     [Header("Stats")]
     public float MoveSpeed, JumpPower;
@@ -16,11 +18,15 @@ public class PlayerControl : MonoBehaviour
     private float jumpBufferCounter;
     [SerializeField] private float FallMult;
 
-    public float AirTimer;
+    [HideInInspector] public float AirTimer;
     [SerializeField] private float MaxFallSpeed;
     public bool Grounded = false;   
 
-    [SerializeField] private LayerMask PortalLayer;
+    [SerializeField] private LayerMask PortalLayer, CanPortalOn;
+
+    public bool HasBlue, HasOrange;
+    [SerializeField] private GameObject BlueDown, BlueLeft, BlueRight, BlueUp;
+    [SerializeField] private GameObject OrgDown, OrgLeft, OrgRight, OrgUp;
     #endregion
 
     private void Awake()
@@ -60,6 +66,7 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, JumpPower);
         }
         #endregion
+
         #region Better Portaling
         if(rb.velocity.magnitude > 10)
         {
@@ -74,6 +81,77 @@ public class PlayerControl : MonoBehaviour
                     print("Name: " + Down.distance);
                     Down.transform.gameObject.GetComponent<Portal>().Teleport(gameObject);
                 }
+            }
+        }
+        #endregion
+
+        //dear lord help me
+        #region Portal Gun
+        if(Input.GetKeyDown(KeyCode.Mouse0) && HasBlue)
+        {
+            //find mouse position and shoot a ray towards it
+            Vector2 MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            //print(MousePos);
+
+            RaycastHit2D hit = Physics2D.Raycast(PortalGunPos.transform.position, MousePos - (Vector2) PortalGunPos.transform.position, 18, CanPortalOn);
+            //Debug.DrawRay(PortalGunPos.transform.position, MousePos -  (Vector2) PortalGunPos.transform.position, Color.black);
+            //print(hit.transform.gameObject.name);
+
+            //if we hit something we can make a portal on, find its name
+            //based on name, create a portal
+            if(hit)
+            {
+                //if theres already anothe blue portal MURDER IT IN COLD BLOOD
+                if (GameObject.FindWithTag("BluePortal") != null)
+                    Destroy(GameObject.FindWithTag("BluePortal"));
+
+                //do some math
+                int x = Mathf.RoundToInt(hit.point.x);
+                int y = Mathf.RoundToInt(hit.point.y);
+
+                //create portal
+                if (hit.transform.name.Contains("Floor"))
+                    Instantiate(BlueUp, new Vector3(x, y, 0), Quaternion.identity);
+                else if(hit.transform.name.Contains("Left"))
+                    Instantiate(BlueRight, new Vector3(x, y, 0), Quaternion.identity);
+                else if (hit.transform.name.Contains("Right"))
+                    Instantiate(BlueLeft, new Vector3(x, y, 0), Quaternion.identity);
+                else if (hit.transform.name.Contains("Down"))
+                    Instantiate(BlueDown, new Vector3(x, y, 0), Quaternion.identity);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && HasOrange)
+        {
+            //find mouse position and shoot a ray towards it
+            Vector2 MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            //print(MousePos);
+
+            RaycastHit2D hit = Physics2D.Raycast(PortalGunPos.transform.position, MousePos - (Vector2)PortalGunPos.transform.position, 18, CanPortalOn);
+            //Debug.DrawRay(PortalGunPos.transform.position, MousePos -  (Vector2) PortalGunPos.transform.position, Color.black);
+            //print(hit.transform.gameObject.name);
+
+            //if we hit something we can make a portal on, find its name
+            //based on name, create a portal
+            if (hit)
+            {
+                //if theres already anothe blue portal MURDER IT IN COLD BLOOD
+                if (GameObject.FindWithTag("OrangePortal") != null)
+                    Destroy(GameObject.FindWithTag("OrangePortal"));
+
+                //do some math
+                int x = Mathf.RoundToInt(hit.point.x);
+                int y = Mathf.RoundToInt(hit.point.y);
+
+                //create portal
+                if (hit.transform.name.Contains("Floor"))
+                    Instantiate(OrgUp, new Vector3(x, y, 0), Quaternion.identity);
+                else if (hit.transform.name.Contains("Left"))
+                    Instantiate(OrgRight, new Vector3(x, y, 0), Quaternion.identity);
+                else if (hit.transform.name.Contains("Right"))
+                    Instantiate(OrgLeft, new Vector3(x, y, 0), Quaternion.identity);
+                else if (hit.transform.name.Contains("Down"))
+                    Instantiate(OrgUp, new Vector3(x, y, 0), Quaternion.identity);
             }
         }
         #endregion
