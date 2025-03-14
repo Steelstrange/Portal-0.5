@@ -52,7 +52,7 @@ public class PlayerControl : MonoBehaviour
         //player has a buffer for jumping
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
-            print("Player tried to jump");
+            //print("Player tried to jump");
             jumpBufferCounter = jumpBufferTime;
         }
         else
@@ -61,7 +61,7 @@ public class PlayerControl : MonoBehaviour
         //if player presses space and we are still in coyote range, jump
         if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && Grounded)
         {
-            print("Player Jumped");
+            //print("Player Jumped");
             jumpBufferCounter = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpPower);
         }

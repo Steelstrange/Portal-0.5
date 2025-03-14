@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ce426f18dafb540b70d135ac979ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsBlue: 1
+  IsBlue: 0
   IsVert: 1
   Direction: Up
 --- !u!1 &5699342062292430704

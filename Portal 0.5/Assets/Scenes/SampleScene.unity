@@ -607,7 +607,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   HasBlue: 1
-  HasOrange: 0
+  HasOrange: 1
   BlueDown: {fileID: 2147802703311846973, guid: c24a1407526e90149b8c833d94d139d3, type: 3}
   BlueLeft: {fileID: 2732880982321933413, guid: 08904deb8e1421243a9e12db796c4ff8, type: 3}
   BlueRight: {fileID: 4839689979322389400, guid: 0026d159dd808d24b897aa98f34ed150, type: 3}
