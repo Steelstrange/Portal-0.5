@@ -10,8 +10,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject PortalGunPos;
 
     [Header("Stats")]
-    public float MoveSpeed, JumpPower;
-
+    public float MoveSpeed;
+    public float AirMoveSpeed, JumpPower;
+    private float OGMoveSpeed;
     public float coyoteTime = .2f;
     private float coyoteTimeCounter;
     public float jumpBufferTime = 0.2f;
@@ -25,6 +26,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private LayerMask PortalLayer, CanPortalOn;
 
     public bool HasBlue, HasOrange;
+
+    [Header("Prefabs")]
     [SerializeField] private GameObject BlueDown, BlueLeft, BlueRight, BlueUp;
     [SerializeField] private GameObject OrgDown, OrgLeft, OrgRight, OrgUp;
     #endregion
@@ -32,6 +35,7 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        OGMoveSpeed = MoveSpeed;
     }
 
     private void Update()
@@ -42,11 +46,13 @@ public class PlayerControl : MonoBehaviour
         {
             coyoteTimeCounter = coyoteTime;
             AirTimer = 0;
+            MoveSpeed = OGMoveSpeed;
         }
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
             AirTimer += Time.deltaTime;
+            MoveSpeed = AirMoveSpeed;
         }
 
         //player has a buffer for jumping

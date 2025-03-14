@@ -593,6 +593,7 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   PortalGunPos: {fileID: 1479925199}
   MoveSpeed: 20
+  AirMoveSpeed: 10
   JumpPower: 5
   coyoteTime: 0.2
   jumpBufferTime: 0.2
