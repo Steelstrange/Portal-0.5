@@ -112,10 +112,13 @@ public class PlayerControl : MonoBehaviour
                 //create portal
                 if (hit.transform.name.Contains("Floor"))
                     Instantiate(BlueUp, new Vector3(x, y, 0), Quaternion.identity);
+
                 else if(hit.transform.name.Contains("Left"))
                     Instantiate(BlueRight, new Vector3(x, y, 0), Quaternion.identity);
+
                 else if (hit.transform.name.Contains("Right"))
                     Instantiate(BlueLeft, new Vector3(x, y, 0), Quaternion.identity);
+                
                 else if (hit.transform.name.Contains("Down"))
                     Instantiate(BlueDown, new Vector3(x, y, 0), Quaternion.identity);
             }
@@ -146,12 +149,15 @@ public class PlayerControl : MonoBehaviour
                 //create portal
                 if (hit.transform.name.Contains("Floor"))
                     Instantiate(OrgUp, new Vector3(x, y, 0), Quaternion.identity);
+
                 else if (hit.transform.name.Contains("Left"))
                     Instantiate(OrgRight, new Vector3(x, y, 0), Quaternion.identity);
+
                 else if (hit.transform.name.Contains("Right"))
                     Instantiate(OrgLeft, new Vector3(x, y, 0), Quaternion.identity);
+
                 else if (hit.transform.name.Contains("Down"))
-                    Instantiate(OrgUp, new Vector3(x, y, 0), Quaternion.identity);
+                    Instantiate(OrgDown, new Vector3(x, y, 0), Quaternion.identity);
             }
         }
         #endregion
