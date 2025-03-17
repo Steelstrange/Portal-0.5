@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1583756625547647650}
   - component: {fileID: 7452939916541811288}
   - component: {fileID: 8246859469466277674}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BlueUp
   m_TagString: BluePortal
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1802418955947482378}
   - component: {fileID: 2192000624520369278}
   - component: {fileID: 4328606922670715580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OrangeUp
   m_TagString: OrangePortal
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6311677616974215454}
   - component: {fileID: 8491649568319074598}
   - component: {fileID: 7782552455611247760}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BlueDown
   m_TagString: BluePortal
   m_Icon: {fileID: 0}

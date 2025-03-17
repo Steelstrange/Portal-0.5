@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8413295116442898886}
   - component: {fileID: 2115863584357353105}
   - component: {fileID: 7402830397072053753}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BlueRight
   m_TagString: BluePortal
   m_Icon: {fileID: 0}
