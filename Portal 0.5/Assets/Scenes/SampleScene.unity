@@ -899,6 +899,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 519420031}
     - target: {fileID: 5299840130744447237, guid: 6abf7e277e65b5742b650d0a7548daf4, type: 3}
+      propertyPath: Pickup.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299840130744447237, guid: 6abf7e277e65b5742b650d0a7548daf4, type: 3}
       propertyPath: PortalCheck.m_Bits
       value: 72
       objectReference: {fileID: 0}

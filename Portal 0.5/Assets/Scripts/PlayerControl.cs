@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     public float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
     [SerializeField] private float FallMult;
+    [SerializeField] private float PickupRange;
 
     [HideInInspector] public float AirTimer;
     [SerializeField] private float MaxFallSpeed;
@@ -26,7 +27,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Layer Masks")]
     [SerializeField] private LayerMask PortalLayer;
-    [SerializeField] private LayerMask CanPortalOn, PortalCheck;
+    [SerializeField] private LayerMask CanPortalOn, PortalCheck, Pickup;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject BlueDown;
@@ -85,7 +86,7 @@ public class PlayerControl : MonoBehaviour
                 //print(Down.transform.position);
                 if(Down.distance < .5) //if we're close to the portal downwards, teleport early
                 {
-                    print("Name: " + Down.distance);
+                    //print("Name: " + Down.transform.name);
                     Down.transform.gameObject.GetComponent<Portal>().Teleport(gameObject);
                 }
             }
@@ -225,6 +226,30 @@ public class PlayerControl : MonoBehaviour
                         print("Portal was blocked");
                 }
             }
+        }
+        #endregion
+        //wasnt too bad
+
+        //this on the other hand
+        #region Picking things up
+        //if player presses E, shoot a ray out a bit and see if there is an object nearby
+        if (Input.GetKey(KeyCode.E))
+        {
+            //find mouse position and shoot a ray towards it
+            Vector2 MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(PortalGunPos.transform.position, MousePos - (Vector2)PortalGunPos.transform.position, PickupRange, Pickup);
+
+            //if we hit something, pick it up
+            if(hit)
+            {
+
+            }
+            //if we didnt hit anything, maybe search around a bit
+            else
+            {
+
+            }
+
         }
         #endregion
     }
