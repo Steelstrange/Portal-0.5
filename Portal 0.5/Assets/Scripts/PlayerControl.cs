@@ -21,15 +21,16 @@ public class PlayerControl : MonoBehaviour
 
     [HideInInspector] public float AirTimer;
     [SerializeField] private float MaxFallSpeed;
-    public bool Grounded = false;   
-
-    [SerializeField] private LayerMask PortalLayer, CanPortalOn;
-
+    public bool Grounded = false;
     public bool HasBlue, HasOrange;
 
+    [Header("Layer Masks")]
+    [SerializeField] private LayerMask PortalLayer;
+    [SerializeField] private LayerMask CanPortalOn, PortalCheck;
+
     [Header("Prefabs")]
-    [SerializeField] private GameObject BlueDown, BlueLeft, BlueRight, BlueUp;
-    [SerializeField] private GameObject OrgDown, OrgLeft, OrgRight, OrgUp;
+    [SerializeField] private GameObject BlueDown;
+    [SerializeField] private GameObject BlueLeft, BlueRight, BlueUp, OrgDown, OrgLeft, OrgRight, OrgUp;
     #endregion
 
     private void Awake()
@@ -117,16 +118,46 @@ public class PlayerControl : MonoBehaviour
 
                 //create portal
                 if (hit.transform.name.Contains("Floor"))
-                    Instantiate(BlueUp, new Vector3(x, y, 0), Quaternion.identity);
+                {
+                    //check to the left and right for anything to block the portal
+                    RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) +  new Vector3(0, .5f, 0), Vector2.left, .999f, PortalCheck);
+                    RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) +  new Vector3(0, .5f, 0), Vector2.right, .999f, PortalCheck);
 
-                else if(hit.transform.name.Contains("Left"))
-                    Instantiate(BlueRight, new Vector3(x, y, 0), Quaternion.identity);
+                    if (!left && !right)
+                        Instantiate(BlueUp, new Vector3(x, y, 0), Quaternion.identity);
+                    else
+                        print("Portal was blocked");
+                }
+                else if (hit.transform.name.Contains("Left"))
+                {
+                    RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.up, .999f, PortalCheck);
+                    RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
+                    if(!up && !down)
+                        Instantiate(BlueRight, new Vector3(x, y, 0), Quaternion.identity);
+                    else
+                        print("Portal was blocked");
+                }
                 else if (hit.transform.name.Contains("Right"))
-                    Instantiate(BlueLeft, new Vector3(x, y, 0), Quaternion.identity);
-                
+                {
+                    RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.up, .999f, PortalCheck);
+                    RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.down, .999f, PortalCheck);
+
+                    if (!up && !down)
+                        Instantiate(BlueLeft, new Vector3(x, y, 0), Quaternion.identity);
+                    else
+                        print("Portal was blocked");
+                }
                 else if (hit.transform.name.Contains("Down"))
-                    Instantiate(BlueDown, new Vector3(x, y, 0), Quaternion.identity);
+                {
+                    RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.left, .999f, PortalCheck);
+                    RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.right, .999f, PortalCheck);
+
+                    if (!left && !right)
+                        Instantiate(BlueDown, new Vector3(x, y, 0), Quaternion.identity);
+                    else
+                        print("Portal was blocked");
+                }
             }
         }
 
@@ -154,16 +185,45 @@ public class PlayerControl : MonoBehaviour
 
                 //create portal
                 if (hit.transform.name.Contains("Floor"))
-                    Instantiate(OrgUp, new Vector3(x, y, 0), Quaternion.identity);
+                {//check to the left and right for anything to block the portal
+                    RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.left, .999f, PortalCheck);
+                    RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.right, .999f, PortalCheck);
 
+                    if (!left && !right)
+                        Instantiate(OrgUp, new Vector3(x, y, 0), Quaternion.identity);
+                    else
+                        print("Portal was blocked");
+                }
                 else if (hit.transform.name.Contains("Left"))
-                    Instantiate(OrgRight, new Vector3(x, y, 0), Quaternion.identity);
+                {
+                    RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.up, .999f, PortalCheck);
+                    RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
+                    if (!up && !down)
+                        Instantiate(OrgRight, new Vector3(x, y, 0), Quaternion.identity);
+                    else
+                        print("Portal was blocked");
+                }
                 else if (hit.transform.name.Contains("Right"))
-                    Instantiate(OrgLeft, new Vector3(x, y, 0), Quaternion.identity);
+                {
+                    RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.up, .999f, PortalCheck);
+                    RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
+                    if (!up && !down)
+                        Instantiate(OrgLeft, new Vector3(x, y, 0), Quaternion.identity);
+                    else
+                        print("Portal was blocked");
+                }
                 else if (hit.transform.name.Contains("Down"))
-                    Instantiate(OrgDown, new Vector3(x, y, 0), Quaternion.identity);
+                {
+                    RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.left, .999f, PortalCheck);
+                    RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.right, .999f, PortalCheck);
+
+                    if (!left && !right)
+                        Instantiate(OrgDown, new Vector3(x, y, 0), Quaternion.identity);
+                    else
+                        print("Portal was blocked");
+                }
             }
         }
         #endregion

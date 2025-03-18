@@ -70,7 +70,7 @@ public class Portal : MonoBehaviour
 
         //find the vector between the center of the portal and whatever is teleporting
         Vector2 Offset = transform.position - other.transform.position;
-        print(Offset);
+        //print(Offset);
 
         if (TpType == "Normal")
         {
