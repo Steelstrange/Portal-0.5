@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject PortalGunPos;
+    private GameObject PickedUpThing;
 
     [Header("Stats")]
     public float MoveSpeed;
@@ -235,19 +236,22 @@ public class PlayerControl : MonoBehaviour
         //if player presses E, shoot a ray out a bit and see if there is an object nearby
         if (Input.GetKey(KeyCode.E))
         {
-            //find mouse position and shoot a ray towards it
-            Vector2 MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(PortalGunPos.transform.position, MousePos - (Vector2)PortalGunPos.transform.position, PickupRange, Pickup);
-
-            //if we hit something, pick it up
-            if(hit)
+            if (PickedUpThing == null)
             {
+                //find mouse position and shoot a ray towards it
+                Vector2 MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(PortalGunPos.transform.position, MousePos - (Vector2)PortalGunPos.transform.position, PickupRange, Pickup);
 
-            }
-            //if we didnt hit anything, maybe search around a bit
-            else
-            {
+                //if we hit something, pick it up
+                if (hit)
+                {
+                    PickedUpThing = hit.transform.gameObject; 
+                }
+                //if we didnt hit anything, maybe search around a bit
+                else
+                {
 
+                }
             }
 
         }
