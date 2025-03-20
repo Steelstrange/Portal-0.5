@@ -141,7 +141,7 @@ public class Portal : MonoBehaviour
     IEnumerator ResetDrag(GameObject other, float OGdrag)
     {
         other.GetComponent<Rigidbody2D>().drag = 0;
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.3f);
         other.GetComponent<Rigidbody2D>().drag = 5;
     }
 }
