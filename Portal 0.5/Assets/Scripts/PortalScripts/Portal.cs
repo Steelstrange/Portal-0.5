@@ -9,21 +9,23 @@ public class Portal : MonoBehaviour
     public bool IsBlue;
     public bool IsVert;
     public string Direction;
+
+    public static List<GameObject> NoTeleport = new List<GameObject>();
     #endregion
 
     public void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.tag != "NoTeleport" && other.gameObject.tag != "Ground")
+        if(other.gameObject.tag != "NoTeleport" && other.gameObject.tag != "Ground" && NoTeleport.Contains(other.gameObject) != true)
         {
             Teleport(other.gameObject);
         }
     }
 
-    IEnumerator NoTele(string OGtag, GameObject other)
+    IEnumerator NoTele(GameObject other)
     {
-        other.tag = "NoTeleport";
+        NoTeleport.Add(other);
         yield return new WaitForSeconds(.2f);
-        other.tag = OGtag;
+        NoTeleport.Remove(other);
     }
 
     public string FindTpType(Portal other)
@@ -57,7 +59,7 @@ public class Portal : MonoBehaviour
         }
 
         //teleport to the transform of the other portal
-        StartCoroutine(NoTele(other.tag, other.gameObject));
+        StartCoroutine(NoTele(other.gameObject));
 
 
         //three types of possible transitions:
@@ -89,13 +91,23 @@ public class Portal : MonoBehaviour
 
         else if (TpType == "Opposite")
         {
+            if (other.name == "Player")
+            {
+                other.GetComponent<PlayerControl>().AirTimer = 0; 
+            }
+
             other.transform.position = OtherPortal.transform.position;
             other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
 
             if (!IsVert)
-                other.GetComponent<Rigidbody2D>().velocity = new Vector2(-other.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<Rigidbody2D>().velocity.y);
+            {
+                other.GetComponent<Rigidbody2D>().velocity = new Vector2(-other.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<Rigidbody2D>().velocity.y );
+            }
             else
-                other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -other.GetComponent<Rigidbody2D>().velocity.y);
+            {
+                other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -other.GetComponent<Rigidbody2D>().velocity.y * 2.5f);
+                ResetDrag2(other);
+            }
         }
 
         else if (TpType == "Perp")
@@ -142,6 +154,12 @@ public class Portal : MonoBehaviour
     {
         other.GetComponent<Rigidbody2D>().drag = 0;
         yield return new WaitForSeconds(.3f);
+        other.GetComponent<Rigidbody2D>().drag = 5;
+    }
+    IEnumerator ResetDrag2(GameObject other)
+    {
+        other.GetComponent<Rigidbody2D>().drag = 0;
+        yield return new WaitForSeconds(.1f);
         other.GetComponent<Rigidbody2D>().drag = 5;
     }
 }

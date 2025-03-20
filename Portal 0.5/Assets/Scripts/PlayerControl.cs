@@ -6,8 +6,10 @@ public class PlayerControl : MonoBehaviour
 {
     #region Vars
     private Rigidbody2D rb;
+    [Header("References")]
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject PortalGunPos;
+    [SerializeField] private Transform LeftPickup, RightPickup;
     private GameObject PickedUpThing;
 
     [Header("Stats")]
@@ -77,15 +79,15 @@ public class PlayerControl : MonoBehaviour
         #endregion
 
         #region Better Portaling
-        if(rb.velocity.magnitude > 10)
+        if (rb.velocity.y < -1)
         {
             //if we're moving fast enough, cast a ray down and up to check if we're doing the classic portal thing
             RaycastHit2D Down = Physics2D.Raycast(transform.position, -Vector2.up, 1, PortalLayer);
-            if(Down)
+            if (Down)
             {
                 //print("Hell yeah");
                 //print(Down.transform.position);
-                if(Down.distance < .5) //if we're close to the portal downwards, teleport early
+                if (Down.distance < .5) //if we're close to the portal downwards, teleport early
                 {
                     //print("Name: " + Down.transform.name);
                     Down.transform.gameObject.GetComponent<Portal>().Teleport(gameObject);
@@ -96,19 +98,19 @@ public class PlayerControl : MonoBehaviour
 
         //dear lord help me
         #region Portal Gun
-        if(Input.GetKeyDown(KeyCode.Mouse0) && HasBlue)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && HasBlue)
         {
             //find mouse position and shoot a ray towards it
             Vector2 MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             //print(MousePos);
 
-            RaycastHit2D hit = Physics2D.Raycast(PortalGunPos.transform.position, MousePos - (Vector2) PortalGunPos.transform.position, 18, CanPortalOn);
+            RaycastHit2D hit = Physics2D.Raycast(PortalGunPos.transform.position, MousePos - (Vector2)PortalGunPos.transform.position, 18, CanPortalOn);
             //Debug.DrawRay(PortalGunPos.transform.position, MousePos -  (Vector2) PortalGunPos.transform.position, Color.black);
             //print(hit.transform.gameObject.name);
 
             //if we hit something we can make a portal on, find its name
             //based on name, create a portal
-            if(hit)
+            if (hit)
             {
                 //if theres already anothe blue portal MURDER IT IN COLD BLOOD
                 if (GameObject.FindWithTag("BluePortal") != null)
@@ -122,8 +124,8 @@ public class PlayerControl : MonoBehaviour
                 if (hit.transform.name.Contains("Floor"))
                 {
                     //check to the left and right for anything to block the portal
-                    RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) +  new Vector3(0, .5f, 0), Vector2.left, .999f, PortalCheck);
-                    RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) +  new Vector3(0, .5f, 0), Vector2.right, .999f, PortalCheck);
+                    RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.left, .999f, PortalCheck);
+                    RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.right, .999f, PortalCheck);
 
                     if (!left && !right)
                         Instantiate(BlueUp, new Vector3(x, y, 0), Quaternion.identity);
@@ -135,7 +137,7 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
-                    if(!up && !down)
+                    if (!up && !down)
                         Instantiate(BlueRight, new Vector3(x, y, 0), Quaternion.identity);
                     else
                         print("Portal was blocked");
@@ -234,7 +236,7 @@ public class PlayerControl : MonoBehaviour
         //this on the other hand
         #region Picking things up
         //if player presses E, shoot a ray out a bit and see if there is an object nearby
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (PickedUpThing == null)
             {
@@ -245,15 +247,38 @@ public class PlayerControl : MonoBehaviour
                 //if we hit something, pick it up
                 if (hit)
                 {
-                    PickedUpThing = hit.transform.gameObject; 
+                    PickedUpThing = hit.transform.gameObject;
+                    PickedUpThing.GetComponent<Collider2D>().enabled = false;
+                    PickedUpThing.GetComponent<Rigidbody2D>().simulated = false;
+                    PickedUpThing.transform.rotation = Quaternion.identity;
+                    PickedUpThing.transform.parent = this.gameObject.transform;
                 }
                 //if we didnt hit anything, maybe search around a bit
                 else
                 {
-
+                    //naw nevermind, only if i have time
                 }
             }
+            else
+            {
+                //drop the thing we have picked up
+                PickedUpThing.GetComponent<Collider2D>().enabled = true;
+                PickedUpThing.GetComponent<Rigidbody2D>().simulated = true;
+                PickedUpThing.transform.parent = null;
+                PickedUpThing = null;
+            }
+        }
 
+        if (PickedUpThing != null)
+        {
+            if(rb.velocity.x > 0)
+            {
+                PickedUpThing.transform.position = RightPickup.position;
+            }
+            else if(rb.velocity.x < 0)
+            {
+                PickedUpThing.transform.position = LeftPickup.position;
+            }
         }
         #endregion
     }
