@@ -7,6 +7,7 @@ public class ButtonScript : MonoBehaviour
     #region Vars
     private List<GameObject> ThingsOnButton = new List<GameObject>(); //keeps track of what is currently on the button
     [Header("References")]
+    private BaseButtonable TheThing;
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Sprite On, Off;
 
@@ -20,6 +21,7 @@ public class ButtonScript : MonoBehaviour
         ThingsOnButton.Add(other.gameObject);
 
         //activate whatever the button is connected too
+        TheThing.GetComponent<BaseButtonable>().OnActivate();
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -31,5 +33,6 @@ public class ButtonScript : MonoBehaviour
             sp.sprite = Off;
 
         //deactivate
+        TheThing.GetComponent<BaseButtonable>().OnDeactivate();
     }
 }
