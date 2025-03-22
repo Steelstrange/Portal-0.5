@@ -5,15 +5,19 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour
 {
     #region Vars
+    private List<GameObject> ThingsOnButton = new List<GameObject>(); //keeps track of what is currently on the button
     [Header("References")]
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Sprite On, Off;
+
+
     #endregion
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         //change the sprite
         sp.sprite = On;
+        ThingsOnButton.Add(other.gameObject);
 
         //activate whatever the button is connected too
     }
@@ -22,7 +26,9 @@ public class ButtonScript : MonoBehaviour
     {
         print("Button is turned off");
         //change the sprite
-        sp.sprite = Off;
+        ThingsOnButton.Remove(other.gameObject);
+        if(ThingsOnButton.Count == 0)
+            sp.sprite = Off;
 
         //deactivate
     }
