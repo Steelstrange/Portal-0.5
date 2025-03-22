@@ -24,7 +24,7 @@ public class ButtonScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        print("Button is turned off");
+        //print("Button is turned off");
         //change the sprite
         ThingsOnButton.Remove(other.gameObject);
         if(ThingsOnButton.Count == 0)
