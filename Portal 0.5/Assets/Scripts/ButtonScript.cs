@@ -7,7 +7,7 @@ public class ButtonScript : MonoBehaviour
     #region Vars
     private List<GameObject> ThingsOnButton = new List<GameObject>(); //keeps track of what is currently on the button
     [Header("References")]
-    private BaseButtonable TheThing;
+    [SerializeField] private BaseButtonable TheThing; //what the button turns on and off
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Sprite On, Off;
 
@@ -29,10 +29,12 @@ public class ButtonScript : MonoBehaviour
         //print("Button is turned off");
         //change the sprite
         ThingsOnButton.Remove(other.gameObject);
-        if(ThingsOnButton.Count == 0)
+        if (ThingsOnButton.Count == 0)
+        {
             sp.sprite = Off;
 
-        //deactivate
-        TheThing.GetComponent<BaseButtonable>().OnDeactivate();
+            //deactivate
+            TheThing.GetComponent<BaseButtonable>().OnDeactivate();
+        }
     }
 }

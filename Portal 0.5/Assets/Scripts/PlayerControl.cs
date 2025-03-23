@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -112,6 +113,12 @@ public class PlayerControl : MonoBehaviour
             //based on name, create a portal
             if (hit)
             {
+                //check if we hit a fizzler before doing anything else
+                if(hit.transform.name.Contains("Fizzler"))
+                {
+                    print("Hit a fizzler");
+                    return; 
+                }
                 //if theres already anothe blue portal MURDER IT IN COLD BLOOD
                 if (GameObject.FindWithTag("BluePortal") != null)
                     Destroy(GameObject.FindWithTag("BluePortal"));
@@ -179,7 +186,13 @@ public class PlayerControl : MonoBehaviour
             //based on name, create a portal
             if (hit)
             {
-                //if theres already anothe blue portal MURDER IT IN COLD BLOOD
+                //check if we hit a fizzler before doing anything else
+                if (hit.transform.name.Contains("Fizzler"))
+                {
+                    print("Hit a fizzler");
+                    return;
+                }
+                //if theres already anothe orange portal MURDER IT IN COLD BLOOD
                 if (GameObject.FindWithTag("OrangePortal") != null)
                     Destroy(GameObject.FindWithTag("OrangePortal"));
 
@@ -248,7 +261,7 @@ public class PlayerControl : MonoBehaviour
                 if (hit)
                 {
                     PickedUpThing = hit.transform.gameObject;
-                    PickedUpThing.GetComponent<Collider2D>().enabled = false;
+                    //PickedUpThing.GetComponent<Collider2D>().enabled = false;
                     PickedUpThing.GetComponent<Rigidbody2D>().simulated = false;
                     PickedUpThing.transform.rotation = Quaternion.identity;
                     PickedUpThing.transform.parent = this.gameObject.transform;
@@ -262,7 +275,7 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 //drop the thing we have picked up
-                PickedUpThing.GetComponent<Collider2D>().enabled = true;
+                //PickedUpThing.GetComponent<Collider2D>().enabled = true;
                 PickedUpThing.GetComponent<Rigidbody2D>().simulated = true;
                 PickedUpThing.transform.parent = null;
                 PickedUpThing = null;
