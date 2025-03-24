@@ -45,9 +45,22 @@ public class FizzlerControl : BaseButtonable
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        print("Fizzler fizzles");
-        Destroy(collision.gameObject);
+        if (other.gameObject.name == "Player") //the players layer
+        {
+            //reset the players portals
+            print("Fizzles the player's portals");
+            if (GameObject.FindGameObjectWithTag("BluePortal") != null)
+                Destroy(GameObject.FindGameObjectWithTag("BluePortal"));
+
+            if (GameObject.FindGameObjectWithTag("OrangePortal") != null)
+                Destroy(GameObject.FindGameObjectWithTag("OrangePortal"));
+        }
+        else
+        {
+            print("Fizzler fizzles");
+            Destroy(other.gameObject);
+        }
     }
 }

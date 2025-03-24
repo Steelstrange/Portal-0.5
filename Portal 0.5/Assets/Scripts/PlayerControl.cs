@@ -261,8 +261,7 @@ public class PlayerControl : MonoBehaviour
                 if (hit)
                 {
                     PickedUpThing = hit.transform.gameObject;
-                    //PickedUpThing.GetComponent<Collider2D>().enabled = false;
-                    PickedUpThing.GetComponent<Rigidbody2D>().simulated = false;
+                    PickedUpThing.GetComponent<Rigidbody2D>().gravityScale = 0;
                     PickedUpThing.transform.rotation = Quaternion.identity;
                     PickedUpThing.transform.parent = this.gameObject.transform;
                 }
@@ -275,9 +274,8 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 //drop the thing we have picked up
-                //PickedUpThing.GetComponent<Collider2D>().enabled = true;
-                PickedUpThing.GetComponent<Rigidbody2D>().simulated = true;
                 PickedUpThing.transform.parent = null;
+                PickedUpThing.GetComponent<Rigidbody2D>().gravityScale = 1;
                 PickedUpThing = null;
             }
         }
