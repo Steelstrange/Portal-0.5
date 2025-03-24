@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c41e9d9def999a41ad0cdbf987ca753
+guid: 96ab123331c68b14184f68f3f5fbcfcd
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -71,7 +71,7 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
@@ -84,7 +84,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   asepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638784151586701622
+  platformSettingsDirtyTick: 638784153670164522
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: DoorSprite
+  - name: DropperSprite2_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.1845238}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 384
-      height: 336
-    spriteID: 92dffb37dbe66ab4991ce2c9d0f93d57
+      width: 256
+      height: 168
+    spriteID: ad0a4d124db744a4ba2b8ba37687e349
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,18 +141,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: DoorSprite_Frame_1
+  - name: DropperSprite2_Frame_1
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.1845238}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 348
-      width: 384
-      height: 336
-    spriteID: 5d546b639d996c34c945b84c21158a09
+      y: 180
+      width: 256
+      height: 168
+    spriteID: 798cdb68bd48323499d3aa387af4e73c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,34 +160,65 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 348}
-  spriteSheetImportData: []
+    uvTransform: {x: 4, y: 180}
+  spriteSheetImportData:
+  - name: DropperSprite2_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 183
+      width: 256
+      height: 165
+    spriteID: bfa8f7760035a0942800bc1c6e039754
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: DropperSprite2_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 7
+      width: 256
+      height: 165
+    spriteID: 7526cca45d64ddf49bb8f616c8536dbe
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
-    guid: -931436573
-    name: DoorSprite
+    guid: 1890851477
+    name: DropperSprite2
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: DoorSprite_Frame_0
+    - name: DropperSprite2
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
-        width: 384
-        height: 336
-      spriteId: 92dffb37dbe66ab4991ce2c9d0f93d57
-    - name: DoorSprite_Frame_1
-      frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 0
-        y: 0
-        width: 384
-        height: 336
-      spriteId: 5d546b639d996c34c945b84c21158a09
+        width: 256
+        height: 256
+      spriteId: ad0a4d124db744a4ba2b8ba37687e349
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -242,4 +273,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 384, y: 384}
+  canvasSize: {x: 256, y: 256}
