@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 945256742306671703}
   - component: {fileID: 1516078456317510877}
   - component: {fileID: 2537865528326107649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ MonoBehaviour:
   coyoteTime: 0.2
   jumpBufferTime: 0.2
   FallMult: 1.2
-  PickupRange: 3
+  PickupRange: 1
   AirTimer: 0
   MaxFallSpeed: 2.6
   Grounded: 0
@@ -337,7 +337,7 @@ GameObject:
   m_Layer: 0
   m_Name: LeftPickup
   m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -368,7 +368,7 @@ GameObject:
   m_Layer: 0
   m_Name: RightPickup
   m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

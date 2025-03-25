@@ -50,7 +50,7 @@ public class DoorControl : BaseButtonable
         }
 
         //if the player presses E, enter the door (load next level)
-        if(PlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if(PlayerInRange && Input.GetKeyDown(KeyCode.E) && Activated)
         {
             print("Only if you have dlc ;)");
             //SceneManager.LoadScene(NextLevel.name);
