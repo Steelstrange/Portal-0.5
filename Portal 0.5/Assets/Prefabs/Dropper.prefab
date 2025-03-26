@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4561668465669498365}
   - component: {fileID: 4552280108347482705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dropper Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1100584000123845891}
   - component: {fileID: 349067630655427976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dropper Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 4423206033263741532}
   - component: {fileID: 2503199587894882325}
   - component: {fileID: 5777109980123543142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dropper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -330,7 +330,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -370,7 +370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8434066216431551507}
   - component: {fileID: 8112224464514863784}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dropper Bars
   m_TagString: Untagged
   m_Icon: {fileID: 0}

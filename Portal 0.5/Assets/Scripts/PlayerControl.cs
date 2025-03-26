@@ -283,13 +283,21 @@ public class PlayerControl : MonoBehaviour
 
         if (PickedUpThing != null)
         {
-            if(rb.velocity.x > 0)
+            if (rb.velocity.magnitude > 0)
             {
-                PickedUpThing.transform.position = RightPickup.position;
-            }
-            else if(rb.velocity.x < 0)
-            {
-                PickedUpThing.transform.position = LeftPickup.position;
+                if (rb.velocity.x > 0)
+                {
+                    PickedUpThing.transform.position = RightPickup.position;
+                }
+                else if (rb.velocity.x < 0)
+                {
+                    PickedUpThing.transform.position = LeftPickup.position;
+                }
+                else
+                {
+                    //default to the right
+                    PickedUpThing.transform.position = RightPickup.position;
+                }
             }
         }
         #endregion
