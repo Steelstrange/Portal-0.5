@@ -264,6 +264,7 @@ public class PlayerControl : MonoBehaviour
                     PickedUpThing.GetComponent<Rigidbody2D>().gravityScale = 0;
                     PickedUpThing.transform.rotation = Quaternion.identity;
                     PickedUpThing.transform.parent = this.gameObject.transform;
+                    PickedUpThing.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 }
                 //if we didnt hit anything, maybe search around a bit
                 else

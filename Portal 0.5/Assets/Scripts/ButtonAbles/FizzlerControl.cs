@@ -47,7 +47,7 @@ public class FizzlerControl : BaseButtonable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player") //the players layer
+        if (other.gameObject.layer == 8) //the players layer
         {
             //reset the players portals
             print("Fizzles the player's portals");
