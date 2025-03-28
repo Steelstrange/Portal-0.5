@@ -16,13 +16,13 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Stats")]
     public float MoveSpeed;
-    public float AirMoveSpeed, JumpPower;
+    public float AirMoveSpeed, JumpPower, GroundDecay = .1f, AirDecay = .8f;
+    private bool IsImputing;
     private float OGMoveSpeed;
     public float coyoteTime = .2f;
     private float coyoteTimeCounter;
     public float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
-    [SerializeField] private float FallMult;
     [SerializeField] private float PickupRange;
 
     [HideInInspector] public float AirTimer;
@@ -334,22 +334,38 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        #region Movement
         if (Input.GetKey(KeyCode.D))
         {
             print("Moving Right");
             rb.AddForce(new Vector2(MoveSpeed, 0));
+            IsImputing = true;
         }
         else if (Input.GetKey(KeyCode.A))
         {
             print("Moving Left");
             rb.AddForce(new Vector2(-MoveSpeed, 0));
+            IsImputing = true;
         }
-
-        //increase the velocity on the way down
+        else
+            IsImputing = false;
+        #endregion
+        //clamp our velocity
         if (rb.velocity.y < 0f)
         {
             //print(Mathf.Clamp(rb.velocity.y, -MaxFallSpeed, 0));
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -MaxFallSpeed, 0));
         }
+
+        #region Apply Friction
+        if(Grounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x * GroundDecay, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(rb.velocity.x * AirDecay, rb.velocity.y);
+        }
+        #endregion
     }
 }
