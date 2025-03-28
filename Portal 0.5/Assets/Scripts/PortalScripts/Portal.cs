@@ -70,35 +70,17 @@ public class Portal : MonoBehaviour
         //print(TpType);
         //print(OtherPortal.name);
 
-        //find the vector between the center of the portal and whatever is teleporting
-        Vector2 Offset = transform.position - other.transform.position;
-        //print(Offset);
+        //find the vector between the center of the portal and whatever is teleporting]
+        Vector3 Offset = FindOffset(other, OtherPortal);
+        other.transform.position = OtherPortal.transform.position + Offset;
 
         if (TpType == "Normal")
         {
-            other.transform.position = OtherPortal.transform.position;
-            if (IsVert)
-            {
-                other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
-            }
-            else
-                other.transform.position -= (Vector3)new Vector2(-Offset.x, Offset.y);
-            if (OtherPortal.Direction == "Down")
-            {
-                other.transform.position -= (Vector3)new Vector2(0, 1);
-            }
+            
         }
 
         else if (TpType == "Opposite")
         {
-            if (other.name == "Player")
-            {
-                other.GetComponent<PlayerControl>().AirTimer = 0; 
-            }
-
-            other.transform.position = OtherPortal.transform.position;
-            other.transform.position -= (Vector3)new Vector2(Offset.x, Offset.y);
-
             if (!IsVert)
             {
                 other.GetComponent<Rigidbody2D>().velocity = new Vector2(-other.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<Rigidbody2D>().velocity.y );
@@ -106,31 +88,22 @@ public class Portal : MonoBehaviour
             else
             {
                 other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -other.GetComponent<Rigidbody2D>().velocity.y);
-                //ResetDrag2(other);
             }
         }
 
         else if (TpType == "Perp")
         {
-            if (other.name == "Player")
-            {
-                other.GetComponent<PlayerControl>().AirTimer = 0;
-                //StartCoroutine(ResetDrag(other, other.GetComponent<Rigidbody2D>().drag));
-            }
-            other.transform.position = OtherPortal.transform.position;
-            
-
             if (OtherPortal.IsVert)
             {
                 if (OtherPortal.Direction == "Down")
                 {
                     other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y /2), -Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x)); 
-                    other.transform.position -= (Vector3)new Vector2(Offset.x, Mathf.Abs(Offset.y));
+                    //other.transform.position -= (Vector3)new Vector2(Offset.x, Mathf.Abs(Offset.y));
                 }
                 else
                 { 
                     other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                    other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
+                    //other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
                 }
             }
             else
@@ -138,29 +111,33 @@ public class Portal : MonoBehaviour
                 if (OtherPortal.Direction == "Right")
                 {
                     //other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                    other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), 0);
+                    //other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
                 }
                 else
                 {
-                    //other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
-                    other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), 0);
+                    //other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
                 }
             }
         }
     }
 
-    IEnumerator ResetDrag(GameObject other, float OGdrag)
+    private Vector3 FindOffset(GameObject other, Portal OtherPortal)
     {
-        other.GetComponent<Rigidbody2D>().drag = 0;
-        yield return new WaitForSeconds(.3f);
-        other.GetComponent<Rigidbody2D>().drag = 5;
-    }
-    IEnumerator ResetDrag2(GameObject other)
-    {
-        other.GetComponent<Rigidbody2D>().drag = 0;
-        yield return new WaitForSeconds(.1f);
-        other.GetComponent<Rigidbody2D>().drag = 5;
+        Vector3 Offset = Vector3.zero;
+
+        if (OtherPortal.Direction == "Left")
+            Offset = new Vector3(-.4f, 0, 0);
+
+        else if (OtherPortal.Direction == "Right")
+            Offset = new Vector3(.4f, 0, 0);
+
+        else if (OtherPortal.Direction == "Up")
+            Offset = new Vector3(0, .1f, 0);
+
+        else if (OtherPortal.Direction == "Down")
+            Offset = new Vector3(0, -1.5f, 0);
+        return Offset;
     }
 }

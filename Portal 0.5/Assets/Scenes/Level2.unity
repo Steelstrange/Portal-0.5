@@ -844,6 +844,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2537865528326107649, guid: 64cfcb6ab3b3c0e49998f7b5207a41a2, type: 3}
+      propertyPath: MaxFallSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537865528326107649, guid: 64cfcb6ab3b3c0e49998f7b5207a41a2, type: 3}
       propertyPath: PortalCheck.m_Bits
       value: 1608
       objectReference: {fileID: 0}
