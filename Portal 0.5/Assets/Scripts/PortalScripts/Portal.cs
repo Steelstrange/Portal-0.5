@@ -105,8 +105,8 @@ public class Portal : MonoBehaviour
             }
             else
             {
-                other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -other.GetComponent<Rigidbody2D>().velocity.y * 2.5f);
-                ResetDrag2(other);
+                other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -other.GetComponent<Rigidbody2D>().velocity.y);
+                //ResetDrag2(other);
             }
         }
 
@@ -115,7 +115,7 @@ public class Portal : MonoBehaviour
             if (other.name == "Player")
             {
                 other.GetComponent<PlayerControl>().AirTimer = 0;
-                StartCoroutine(ResetDrag(other, other.GetComponent<Rigidbody2D>().drag));
+                //StartCoroutine(ResetDrag(other, other.GetComponent<Rigidbody2D>().drag));
             }
             other.transform.position = OtherPortal.transform.position;
             
@@ -126,11 +126,10 @@ public class Portal : MonoBehaviour
                 {
                     other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y /2), -Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x)); 
                     other.transform.position -= (Vector3)new Vector2(Offset.x, Mathf.Abs(Offset.y));
-                    print(other.transform.position);
                 }
                 else
                 { 
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
                     other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
                 }
             }
@@ -138,12 +137,14 @@ public class Portal : MonoBehaviour
             {
                 if (OtherPortal.Direction == "Right")
                 {
-                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                    //other.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
                     other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
                 }
                 else
                 {
-                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                    //other.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.y), Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
+                    other.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Mathf.Abs(other.GetComponent<Rigidbody2D>().velocity.x));
                     other.transform.position -= (Vector3)new Vector2(Offset.y, Offset.x);
                 }
             }

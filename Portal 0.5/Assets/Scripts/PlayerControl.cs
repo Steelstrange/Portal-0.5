@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -80,7 +81,7 @@ public class PlayerControl : MonoBehaviour
         #endregion
 
         #region Better Portaling
-        if (rb.velocity.y < -1)
+        if (rb.velocity.y < -2)
         {
             //if we're moving fast enough, cast a ray down and up to check if we're doing the classic portal thing
             RaycastHit2D Down = Physics2D.Raycast(transform.position, -Vector2.up, 1, PortalLayer);
@@ -91,6 +92,7 @@ public class PlayerControl : MonoBehaviour
                 if (Down.distance < .5) //if we're close to the portal downwards, teleport early
                 {
                     //print("Name: " + Down.transform.name);
+                    transform.position = Down.point;
                     Down.transform.gameObject.GetComponent<Portal>().Teleport(gameObject);
                 }
             }
@@ -120,19 +122,25 @@ public class PlayerControl : MonoBehaviour
                     return; 
                 }
                 //if theres already anothe blue portal MURDER IT IN COLD BLOOD
-                if (GameObject.FindWithTag("BluePortal") != null)
-                    Destroy(GameObject.FindWithTag("BluePortal"));
+                
 
                 //do some math
-                int x = Mathf.RoundToInt(hit.point.x);
-                int y = Mathf.RoundToInt(hit.point.y);
+                //int x = Mathf.RoundToInt(hit.point.x);
+                //int y = Mathf.RoundToInt(hit.point.y);
+                float x = Mathf.Round(hit.point.x *2) /2;
+                float y = Mathf.Round(hit.point.y * 2) / 2;
 
+                print(hit.point.x < 0);
                 //create portal
+
                 if (hit.transform.name.Contains("Floor"))
                 {
                     //check to the left and right for anything to block the portal
                     RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.left, .999f, PortalCheck);
                     RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.right, .999f, PortalCheck);
+
+                    if (GameObject.FindWithTag("BluePortal") != null)
+                        Destroy(GameObject.FindWithTag("BluePortal"));
 
                     if (!left && !right)
                         Instantiate(BlueUp, new Vector3(x, y, 0), Quaternion.identity);
@@ -144,6 +152,9 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
+                    if (GameObject.FindWithTag("BluePortal") != null)
+                        Destroy(GameObject.FindWithTag("BluePortal"));
+
                     if (!up && !down)
                         Instantiate(BlueRight, new Vector3(x, y, 0), Quaternion.identity);
                     else
@@ -154,6 +165,9 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
+                    if (GameObject.FindWithTag("BluePortal") != null)
+                        Destroy(GameObject.FindWithTag("BluePortal"));
+
                     if (!up && !down)
                         Instantiate(BlueLeft, new Vector3(x, y, 0), Quaternion.identity);
                     else
@@ -163,6 +177,9 @@ public class PlayerControl : MonoBehaviour
                 {
                     RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.left, .999f, PortalCheck);
                     RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.right, .999f, PortalCheck);
+
+                    if (GameObject.FindWithTag("BluePortal") != null)
+                        Destroy(GameObject.FindWithTag("BluePortal"));
 
                     if (!left && !right)
                         Instantiate(BlueDown, new Vector3(x, y, 0), Quaternion.identity);
@@ -197,14 +214,17 @@ public class PlayerControl : MonoBehaviour
                     Destroy(GameObject.FindWithTag("OrangePortal"));
 
                 //do some math
-                int x = Mathf.RoundToInt(hit.point.x);
-                int y = Mathf.RoundToInt(hit.point.y);
+                float x = Mathf.Round(hit.point.x * 2) / 2;
+                float y = Mathf.Round(hit.point.y * 2) / 2;
 
                 //create portal
                 if (hit.transform.name.Contains("Floor"))
                 {//check to the left and right for anything to block the portal
                     RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.left, .999f, PortalCheck);
                     RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.right, .999f, PortalCheck);
+
+                    if (GameObject.FindWithTag("OrangePortal") != null)
+                        Destroy(GameObject.FindWithTag("OrangePortal"));
 
                     if (!left && !right)
                         Instantiate(OrgUp, new Vector3(x, y, 0), Quaternion.identity);
@@ -216,6 +236,9 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
+                    if (GameObject.FindWithTag("OrangePortal") != null)
+                        Destroy(GameObject.FindWithTag("OrangePortal"));
+
                     if (!up && !down)
                         Instantiate(OrgRight, new Vector3(x, y, 0), Quaternion.identity);
                     else
@@ -226,6 +249,9 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
+                    if (GameObject.FindWithTag("OrangePortal") != null)
+                        Destroy(GameObject.FindWithTag("OrangePortal"));
+
                     if (!up && !down)
                         Instantiate(OrgLeft, new Vector3(x, y, 0), Quaternion.identity);
                     else
@@ -235,6 +261,9 @@ public class PlayerControl : MonoBehaviour
                 {
                     RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.left, .999f, PortalCheck);
                     RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.right, .999f, PortalCheck);
+
+                    if (GameObject.FindWithTag("OrangePortal") != null)
+                        Destroy(GameObject.FindWithTag("OrangePortal"));
 
                     if (!left && !right)
                         Instantiate(OrgDown, new Vector3(x, y, 0), Quaternion.identity);
@@ -307,18 +336,20 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
+            print("Moving Right");
             rb.AddForce(new Vector2(MoveSpeed, 0));
         }
         else if (Input.GetKey(KeyCode.A))
         {
+            print("Moving Left");
             rb.AddForce(new Vector2(-MoveSpeed, 0));
         }
 
         //increase the velocity on the way down
         if (rb.velocity.y < 0f)
         {
-            //print(Mathf.Clamp(Mathf.Pow(AirTimer, FallMult), 0, MaxFallSpeed));
-            rb.velocity -= new Vector2(0, Mathf.Clamp(Mathf.Pow(AirTimer, FallMult), 0, MaxFallSpeed));
+            //print(Mathf.Clamp(rb.velocity.y, -MaxFallSpeed, 0));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -MaxFallSpeed, 0));
         }
     }
 }

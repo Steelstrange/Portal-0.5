@@ -8,7 +8,7 @@ public class JumpCheck : MonoBehaviour
 
     private void Awake()
     {
-        PC = GameObject.Find("Player").GetComponent<PlayerControl>();
+        PC = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
     private void OnTriggerStay2D(Collider2D other)
     {

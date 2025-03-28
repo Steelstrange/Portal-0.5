@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3638645176173128127}
   - component: {fileID: 7564096970425830089}
-  - component: {fileID: 945256742306671703}
   - component: {fileID: 1516078456317510877}
   - component: {fileID: 2537865528326107649}
+  - component: {fileID: 4390233447678250813}
   m_Layer: 8
   m_Name: Player 1
   m_TagString: Player
@@ -91,75 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &945256742306671703
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2807010757727503393}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 512
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.504, y: 0}
-    oldSize: {x: 1.25, y: 2.51}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.46171576, y: 0.4662118}
-      - {x: 0.6373965, y: 0.46739644}
-      - {x: 0.62, y: 1.42}
-      - {x: 0.58, y: 1.5}
-      - {x: 0.44, y: 1.63}
-      - {x: 0.27520704, y: 1.7247928}
-      - {x: 0.39, y: 1.91}
-      - {x: 0.41911232, y: 2.2526033}
-      - {x: 0.12562114, y: 2.536095}
-      - {x: -0.17999999, y: 2.51}
-      - {x: -0.32999998, y: 2.3899999}
-      - {x: -0.42, y: 2.25}
-      - {x: -0.42, y: 1.9799999}
-      - {x: -0.26562113, y: 1.7778103}
-      - {x: -0.28301764, y: 1.7082245}
-      - {x: -0.63, y: 1.4499999}
-      - {x: -0.63, y: 0.47}
-      - {x: -0.45, y: 0.47}
-      - {x: -0.45, y: 0}
-      - {x: -0.19, y: 0}
-      - {x: -0.16662776, y: 0.47869822}
-      - {x: 0.16605896, y: 0.4771485}
-      - {x: 0.19, y: 0}
-      - {x: 0.45, y: 0}
-  m_UseDelaunayMesh: 0
 --- !u!50 &1516078456317510877
 Rigidbody2D:
   serializedVersion: 4
@@ -223,7 +154,7 @@ MonoBehaviour:
     m_Bits: 64
   PortalCheck:
     serializedVersion: 2
-    m_Bits: 584
+    m_Bits: 1608
   Pickup:
     serializedVersion: 2
     m_Bits: 128
@@ -235,6 +166,51 @@ MonoBehaviour:
   OrgLeft: {fileID: 1547529638959144789, guid: e7c1c344df06a004980924219f555e95, type: 3}
   OrgRight: {fileID: 6277135453860952679, guid: 1d667777ef49bf2469f913699fb13f3e, type: 3}
   OrgUp: {fileID: 1799897724333318787, guid: 18aa9c380211c8b48919f7e5694a6669, type: 3}
+--- !u!61 &4390233447678250813
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807010757727503393}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.004999995, y: 1.255}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.504, y: 0}
+    oldSize: {x: 1.25, y: 2.51}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 2.51}
+  m_EdgeRadius: 0
 --- !u!1 &4335520234229958719
 GameObject:
   m_ObjectHideFlags: 0
