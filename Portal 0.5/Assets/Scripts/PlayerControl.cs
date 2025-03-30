@@ -217,10 +217,7 @@ public class PlayerControl : MonoBehaviour
                     print("Hit a fizzler");
                     return;
                 }
-                //if theres already anothe orange portal MURDER IT IN COLD BLOOD
-                if (GameObject.FindWithTag("OrangePortal") != null)
-                    Destroy(GameObject.FindWithTag("OrangePortal"));
-
+                
                 //do some math
                 float x = Mathf.Round(hit.point.x * 2) / 2;
                 float y = Mathf.Round(hit.point.y * 2) / 2;

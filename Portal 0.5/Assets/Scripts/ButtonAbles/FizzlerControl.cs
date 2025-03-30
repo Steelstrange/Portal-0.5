@@ -47,7 +47,7 @@ public class FizzlerControl : BaseButtonable
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == 8) //the players layer
         {
