@@ -25,6 +25,11 @@ public class DropperControl : MonoBehaviour
         {
             //spawn in the thing
             GameObject Respawned = Instantiate(ThingToSpawn, Top.transform.position, Quaternion.identity);
+            if (Respawned.name.Contains("Cube")) 
+            {
+                Respawned.GetComponent<CompanionCubeControl>().NameOfDropper = this.gameObject.name;
+            }
+
             Respawned.GetComponent<Collider2D>().enabled = false;
             StartCoroutine(ReEnableCollider(Respawned));
 

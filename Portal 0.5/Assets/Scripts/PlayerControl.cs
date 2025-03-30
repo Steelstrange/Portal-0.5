@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -129,7 +130,7 @@ public class PlayerControl : MonoBehaviour
                 float x = Mathf.Round(hit.point.x *2) /2;
                 float y = Mathf.Round(hit.point.y * 2) / 2;
 
-                print(hit.point.x < 0);
+
                 //create portal
 
                 if (hit.transform.name.Contains("Floor"))
@@ -137,12 +138,13 @@ public class PlayerControl : MonoBehaviour
                     //check to the left and right for anything to block the portal
                     RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.left, .999f, PortalCheck);
                     RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.right, .999f, PortalCheck);
-
-                    if (GameObject.FindWithTag("BluePortal") != null)
-                        Destroy(GameObject.FindWithTag("BluePortal"));
-
+                    
                     if (!left && !right)
+                    {
+                        if (GameObject.FindWithTag("BluePortal") != null)
+                            Destroy(GameObject.FindWithTag("BluePortal"));
                         Instantiate(BlueUp, new Vector3(x, y, 0), Quaternion.identity);
+                    }
                     else
                         print("Portal was blocked");
                 }
@@ -151,11 +153,12 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
-                    if (GameObject.FindWithTag("BluePortal") != null)
-                        Destroy(GameObject.FindWithTag("BluePortal"));
-
                     if (!up && !down)
+                    {
+                        if (GameObject.FindWithTag("BluePortal") != null)
+                            Destroy(GameObject.FindWithTag("BluePortal"));
                         Instantiate(BlueRight, new Vector3(x, y, 0), Quaternion.identity);
+                    }
                     else
                         print("Portal was blocked");
                 }
@@ -164,11 +167,14 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
-                    if (GameObject.FindWithTag("BluePortal") != null)
-                        Destroy(GameObject.FindWithTag("BluePortal"));
+                    
 
                     if (!up && !down)
+                    {
+                        if (GameObject.FindWithTag("BluePortal") != null)
+                            Destroy(GameObject.FindWithTag("BluePortal"));
                         Instantiate(BlueLeft, new Vector3(x, y, 0), Quaternion.identity);
+                    }
                     else
                         print("Portal was blocked");
                 }
@@ -177,11 +183,14 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.left, .999f, PortalCheck);
                     RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.right, .999f, PortalCheck);
 
-                    if (GameObject.FindWithTag("BluePortal") != null)
-                        Destroy(GameObject.FindWithTag("BluePortal"));
+                    
 
                     if (!left && !right)
+                    {
+                        if (GameObject.FindWithTag("BluePortal") != null)
+                            Destroy(GameObject.FindWithTag("BluePortal"));
                         Instantiate(BlueDown, new Vector3(x, y, 0), Quaternion.identity);
+                    }
                     else
                         print("Portal was blocked");
                 }
@@ -222,11 +231,12 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.left, .999f, PortalCheck);
                     RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, .5f, 0), Vector2.right, .999f, PortalCheck);
 
-                    if (GameObject.FindWithTag("OrangePortal") != null)
-                        Destroy(GameObject.FindWithTag("OrangePortal"));
-
                     if (!left && !right)
+                    {
+                        if (GameObject.FindWithTag("OrangePortal") != null)
+                            Destroy(GameObject.FindWithTag("OrangePortal"));
                         Instantiate(OrgUp, new Vector3(x, y, 0), Quaternion.identity);
+                    }
                     else
                         print("Portal was blocked");
                 }
@@ -235,11 +245,12 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
-                    if (GameObject.FindWithTag("OrangePortal") != null)
-                        Destroy(GameObject.FindWithTag("OrangePortal"));
-
                     if (!up && !down)
+                    {
+                        if (GameObject.FindWithTag("OrangePortal") != null)
+                            Destroy(GameObject.FindWithTag("OrangePortal"));
                         Instantiate(OrgRight, new Vector3(x, y, 0), Quaternion.identity);
+                    }
                     else
                         print("Portal was blocked");
                 }
@@ -248,11 +259,13 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D up = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.up, .999f, PortalCheck);
                     RaycastHit2D down = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(-.5f, 0, 0), Vector2.down, .999f, PortalCheck);
 
-                    if (GameObject.FindWithTag("OrangePortal") != null)
-                        Destroy(GameObject.FindWithTag("OrangePortal"));
-
                     if (!up && !down)
+                    {
+                        if (GameObject.FindWithTag("OrangePortal") != null)
+                            Destroy(GameObject.FindWithTag("OrangePortal"));
+
                         Instantiate(OrgLeft, new Vector3(x, y, 0), Quaternion.identity);
+                    }
                     else
                         print("Portal was blocked");
                 }
@@ -261,11 +274,13 @@ public class PlayerControl : MonoBehaviour
                     RaycastHit2D left = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.left, .999f, PortalCheck);
                     RaycastHit2D right = Physics2D.Raycast(new Vector3(x, y, 0) + new Vector3(0, -.5f, 0), Vector2.right, .999f, PortalCheck);
 
-                    if (GameObject.FindWithTag("OrangePortal") != null)
-                        Destroy(GameObject.FindWithTag("OrangePortal"));
-
                     if (!left && !right)
+                    {
+                        if (GameObject.FindWithTag("OrangePortal") != null)
+                            Destroy(GameObject.FindWithTag("OrangePortal"));
+
                         Instantiate(OrgDown, new Vector3(x, y, 0), Quaternion.identity);
+                    }
                     else
                         print("Portal was blocked");
                 }
@@ -329,6 +344,14 @@ public class PlayerControl : MonoBehaviour
                     PickedUpThing.transform.position = RightPickup.position;
                 }
             }
+        }
+        #endregion
+
+        #region Reset
+        //if player inputs R, reset what scene we're on
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         #endregion
     }

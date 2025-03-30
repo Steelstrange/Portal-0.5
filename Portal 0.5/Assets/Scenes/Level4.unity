@@ -963,6 +963,10 @@ PrefabInstance:
       propertyPath: Dropper
       value: 
       objectReference: {fileID: 1940483552}
+    - target: {fileID: 1959161570048314458, guid: af0099e03d03bab4e9694f360b2c8399, type: 3}
+      propertyPath: NameOfDropper
+      value: CubeDropper
+      objectReference: {fileID: 0}
     - target: {fileID: 5470198303479318709, guid: af0099e03d03bab4e9694f360b2c8399, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.23
