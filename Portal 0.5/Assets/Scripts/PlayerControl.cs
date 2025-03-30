@@ -12,23 +12,18 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject PortalGunPos;
     [SerializeField] private Transform LeftPickup, RightPickup;
-    private GameObject PickedUpThing;
+    public GameObject PickedUpThing;
 
     [Header("Stats")]
     public float MoveSpeed;
-    public float AirMoveSpeed, JumpPower, GroundDecay = .1f, AirDecay = .8f;
-    private bool IsImputing;
+    public float AirMoveSpeed, JumpPower, GroundDecay = .1f, OGAirDecay = .8f, AirDecay = .9f;
     private float OGMoveSpeed;
     public float coyoteTime = .2f;
     private float coyoteTimeCounter;
     public float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
     [SerializeField] private float PickupRange;
-
-    [HideInInspector] public float AirTimer;
     [SerializeField] private float MaxFallSpeed;
-    public bool Grounded = false;
-    public bool HasBlue, HasOrange;
 
     [Header("Layer Masks")]
     [SerializeField] private LayerMask PortalLayer;
@@ -37,12 +32,17 @@ public class PlayerControl : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject BlueDown;
     [SerializeField] private GameObject BlueLeft, BlueRight, BlueUp, OrgDown, OrgLeft, OrgRight, OrgUp;
+    
+    public bool Grounded = false;
+    public bool HasBlue, HasOrange;
+    public static PlayerControl Main;
     #endregion
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         OGMoveSpeed = MoveSpeed;
+        Main = this;
     }
 
     private void Update()
@@ -52,13 +52,11 @@ public class PlayerControl : MonoBehaviour
         if (Grounded)
         {
             coyoteTimeCounter = coyoteTime;
-            AirTimer = 0;
             MoveSpeed = OGMoveSpeed;
         }
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
-            AirTimer += Time.deltaTime;
             MoveSpeed = AirMoveSpeed;
         }
 
@@ -77,6 +75,7 @@ public class PlayerControl : MonoBehaviour
             //print("Player Jumped");
             jumpBufferCounter = 0f;
             rb.velocity = new Vector2(rb.velocity.x, JumpPower);
+            AirDecay = .9f;
         }
         #endregion
 
@@ -291,6 +290,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     PickedUpThing = hit.transform.gameObject;
                     PickedUpThing.GetComponent<Rigidbody2D>().gravityScale = 0;
+                    PickedUpThing.GetComponent<Rigidbody2D>().simulated = false;
                     PickedUpThing.transform.rotation = Quaternion.identity;
                     PickedUpThing.transform.parent = this.gameObject.transform;
                     PickedUpThing.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -306,6 +306,7 @@ public class PlayerControl : MonoBehaviour
                 //drop the thing we have picked up
                 PickedUpThing.transform.parent = null;
                 PickedUpThing.GetComponent<Rigidbody2D>().gravityScale = 1;
+                PickedUpThing.GetComponent<Rigidbody2D>().simulated = true;
                 PickedUpThing = null;
             }
         }
@@ -337,18 +338,12 @@ public class PlayerControl : MonoBehaviour
         #region Movement
         if (Input.GetKey(KeyCode.D))
         {
-            print("Moving Right");
             rb.AddForce(new Vector2(MoveSpeed, 0));
-            IsImputing = true;
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            print("Moving Left");
             rb.AddForce(new Vector2(-MoveSpeed, 0));
-            IsImputing = true;
         }
-        else
-            IsImputing = false;
         #endregion
         //clamp our velocity
         if (rb.velocity.y < 0f)

@@ -7,7 +7,7 @@ public class FizzlerControl : BaseButtonable
     #region Vars
     [Header("References")]
     [SerializeField] Collider2D FizzBox;
-    [SerializeField] SpriteRenderer FizzRenderer;
+    [SerializeField] SpriteRenderer FizzRenderer, FizzRenderer2;
     [SerializeField] Sprite On, Off;
 
     private bool Changed = false;
@@ -15,16 +15,16 @@ public class FizzlerControl : BaseButtonable
 
     public override void OnActivate()
     {
-        if(Activated == false)
+        if(Activated == true)
             Changed = true;
-        Activated = true;
+        Activated = false;
     }
 
     public override void OnDeactivate()
     {
-        if(Activated == true)
+        if(Activated == false)
             Changed = true;
-        Activated = false;
+        Activated = true;
     }
 
     private void Update()
@@ -36,11 +36,13 @@ public class FizzlerControl : BaseButtonable
             {
                 FizzBox.enabled = true;
                 FizzRenderer.sprite = On;
+                FizzRenderer2.sprite = On;
             }
             else if(!Activated)
             {
                 FizzBox.enabled = false;
                 FizzRenderer.sprite = Off;
+                FizzRenderer2.sprite = Off;
             }
         }
     }
@@ -56,7 +58,15 @@ public class FizzlerControl : BaseButtonable
 
             if (GameObject.FindGameObjectWithTag("OrangePortal") != null)
                 Destroy(GameObject.FindGameObjectWithTag("OrangePortal"));
+
+            //check if player is holding something
+            if (PlayerControl.Main.PickedUpThing != null)
+            {
+                print("Fizzling held object");
+                Destroy(PlayerControl.Main.PickedUpThing);
+            }
         }
+
         else
         {
             print("Fizzler fizzles");

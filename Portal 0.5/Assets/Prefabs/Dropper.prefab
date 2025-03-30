@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -6078595606809177054, guid: 66825f1439995f540a43478c145009d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -177,8 +177,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2506404321125670189}
-  - component: {fileID: 459131133020914099}
   - component: {fileID: 4423206033263741532}
+  - component: {fileID: 459131133020914099}
   - component: {fileID: 2503199587894882325}
   - component: {fileID: 5777109980123543142}
   m_Layer: 6
@@ -206,6 +206,25 @@ Transform:
   - {fileID: 4561668465669498365}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4423206033263741532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3781196153267916470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa5eea38aa43c14ea77f7226a028aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThingToSpawn: {fileID: 0}
+  Top: {fileID: 349067630655427976}
+  Bars: {fileID: 8112224464514863784}
+  Bottom: {fileID: 4552280108347482705}
+  Open: {fileID: -6670946356003832111, guid: 66825f1439995f540a43478c145009d8, type: 3}
+  Closed: {fileID: -6078595606809177054, guid: 66825f1439995f540a43478c145009d8, type: 3}
+  BottomCollider: {fileID: 459131133020914099}
 --- !u!61 &459131133020914099
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -251,25 +270,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 0.19071949}
   m_EdgeRadius: 0
---- !u!114 &4423206033263741532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3781196153267916470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa5eea38aa43c14ea77f7226a028aa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ThingToSpawn: {fileID: 0}
-  Top: {fileID: 349067630655427976}
-  Bars: {fileID: 8112224464514863784}
-  Bottom: {fileID: 4552280108347482705}
-  Open: {fileID: -6670946356003832111, guid: 66825f1439995f540a43478c145009d8, type: 3}
-  Closed: {fileID: -6078595606809177054, guid: 66825f1439995f540a43478c145009d8, type: 3}
-  BottomCollider: {fileID: 459131133020914099}
 --- !u!61 &2503199587894882325
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -432,7 +432,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 6484313167847904457, guid: 96ab123331c68b14184f68f3f5fbcfcd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

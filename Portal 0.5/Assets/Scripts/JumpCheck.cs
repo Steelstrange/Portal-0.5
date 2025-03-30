@@ -5,16 +5,26 @@ using UnityEngine;
 public class JumpCheck : MonoBehaviour
 {
     PlayerControl PC;
-
+    private float UpdateAirDecay;
     private void Awake()
     {
         PC = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        UpdateAirDecay = PC.OGAirDecay;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PC.AirDecay = UpdateAirDecay;
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag == "Ground")
+        {
             PC.Grounded = true;
+        }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         //if we leave ground, we're no longer grounded (crazy I know)

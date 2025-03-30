@@ -42,7 +42,7 @@ public class DropperControl : MonoBehaviour
 
     IEnumerator ReEnableCollider(GameObject thing)
     {
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.4f);
         thing.GetComponent<Collider2D>().enabled = true;
     }
 }

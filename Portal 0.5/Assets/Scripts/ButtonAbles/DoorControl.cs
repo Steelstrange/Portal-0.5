@@ -9,7 +9,7 @@ public class DoorControl : BaseButtonable
     [Header("References")]
     [SerializeField] SpriteRenderer sp;
     [SerializeField] Sprite Open, Closed;
-    [SerializeField] Scene NextLevel;
+    [SerializeField] string NameOfNextScene;
 
     #region In-House vars 
     private bool Changed = false;
@@ -52,8 +52,8 @@ public class DoorControl : BaseButtonable
         //if the player presses E, enter the door (load next level)
         if(PlayerInRange && Input.GetKeyDown(KeyCode.E) && Activated)
         {
-            print("Only if you have dlc ;)");
-            //SceneManager.LoadScene(NextLevel.name);
+            //print("Only if you have dlc ;)");
+            SceneManager.LoadScene(NameOfNextScene);
         }
     }
 

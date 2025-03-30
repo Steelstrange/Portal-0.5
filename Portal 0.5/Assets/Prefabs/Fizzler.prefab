@@ -186,10 +186,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 895
+    m_Bits: 639
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -234,5 +234,6 @@ MonoBehaviour:
   Activated: 1
   FizzBox: {fileID: 5449788600344793848}
   FizzRenderer: {fileID: 2935427306877924257}
+  FizzRenderer2: {fileID: 2360570181227141195}
   On: {fileID: 8366940409617887168, guid: b3d1f1b2964b9294fbc4fd49f361f32a, type: 3}
   Off: {fileID: -6285744333809172589, guid: b3d1f1b2964b9294fbc4fd49f361f32a, type: 3}

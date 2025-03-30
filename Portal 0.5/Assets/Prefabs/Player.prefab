@@ -134,19 +134,17 @@ MonoBehaviour:
   PortalGunPos: {fileID: 8487261062869635779}
   LeftPickup: {fileID: 5689617114628142390}
   RightPickup: {fileID: 7388039286987695824}
+  PickedUpThing: {fileID: 0}
   MoveSpeed: 25
   AirMoveSpeed: 12.5
   JumpPower: 5
   GroundDecay: 0.8
-  AirDecay: 0.9
+  OGAirDecay: 1
+  AirDecay: 1
   coyoteTime: 0.2
   jumpBufferTime: 0.2
   PickupRange: 1
-  AirTimer: 0
   MaxFallSpeed: 25
-  Grounded: 1
-  HasBlue: 1
-  HasOrange: 1
   PortalLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -167,6 +165,9 @@ MonoBehaviour:
   OrgLeft: {fileID: 1547529638959144789, guid: e7c1c344df06a004980924219f555e95, type: 3}
   OrgRight: {fileID: 6277135453860952679, guid: 1d667777ef49bf2469f913699fb13f3e, type: 3}
   OrgUp: {fileID: 1799897724333318787, guid: 18aa9c380211c8b48919f7e5694a6669, type: 3}
+  Grounded: 1
+  HasBlue: 1
+  HasOrange: 1
 --- !u!60 &5093330009520138148
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -296,7 +297,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 959
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -313,7 +314,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003317833, y: 0.20902681}
+  m_Offset: {x: -0.003317833, y: -0.041173235}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -324,7 +325,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8473778, y: 0.5819464}
+  m_Size: {x: 0.8473778, y: 0.08154622}
   m_EdgeRadius: 0
 --- !u!1 &4392454233430345576
 GameObject:

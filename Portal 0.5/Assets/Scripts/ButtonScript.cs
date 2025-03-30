@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ButtonScript : MonoBehaviour
 {
     #region Vars
     private List<GameObject> ThingsOnButton = new List<GameObject>(); //keeps track of what is currently on the button
     [Header("References")]
-    [SerializeField] private BaseButtonable TheThing; //what the button turns on and off
+    [SerializeField] private List<GameObject> TheThings = new List<GameObject>(); //what the button turns on and off
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Sprite On, Off;
 
@@ -21,7 +22,11 @@ public class ButtonScript : MonoBehaviour
         ThingsOnButton.Add(other.gameObject);
 
         //activate whatever the button is connected too
-        TheThing.GetComponent<BaseButtonable>().OnActivate();
+        //TheThing.GetComponent<BaseButtonable>().OnActivate();
+        for(int i = 0; i < TheThings.Count; i++)
+        {
+            TheThings[i].GetComponent<BaseButtonable>().OnActivate();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -34,7 +39,11 @@ public class ButtonScript : MonoBehaviour
             sp.sprite = Off;
 
             //deactivate
-            TheThing.GetComponent<BaseButtonable>().OnDeactivate();
+            //TheThing.GetComponent<BaseButtonable>().OnDeactivate();
+            for (int i = 0; i < TheThings.Count; i++)
+            {
+                TheThings[i].GetComponent<BaseButtonable>().OnDeactivate();
+            }
         }
     }
 }
