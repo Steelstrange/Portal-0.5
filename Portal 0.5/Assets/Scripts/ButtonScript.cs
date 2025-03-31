@@ -11,6 +11,7 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] private List<GameObject> TheThings = new List<GameObject>(); //what the button turns on and off
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Sprite On, Off;
+    [SerializeField] private AudioSource aud;
 
 
     #endregion
@@ -20,6 +21,7 @@ public class ButtonScript : MonoBehaviour
         //change the sprite
         sp.sprite = On;
         ThingsOnButton.Add(other.gameObject);
+        aud.Play();
 
         //activate whatever the button is connected too
         //TheThing.GetComponent<BaseButtonable>().OnActivate();

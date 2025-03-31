@@ -29,4 +29,9 @@ public class LevelManager : MonoBehaviour
             SceneManager.LoadScene(LastPlayed);
         }
     }
+
+    public void LoadByName(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
 }

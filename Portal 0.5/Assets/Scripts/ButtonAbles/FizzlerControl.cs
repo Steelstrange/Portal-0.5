@@ -9,6 +9,7 @@ public class FizzlerControl : BaseButtonable
     [SerializeField] Collider2D FizzBox;
     [SerializeField] SpriteRenderer FizzRenderer, FizzRenderer2;
     [SerializeField] Sprite On, Off;
+    [SerializeField] private AudioSource aud;
 
     private bool Changed = false;
     #endregion
@@ -64,6 +65,7 @@ public class FizzlerControl : BaseButtonable
             {
                 print("Fizzling held object");
                 Destroy(PlayerControl.Main.PickedUpThing);
+                aud.Play();
             }
         }
 
@@ -71,6 +73,7 @@ public class FizzlerControl : BaseButtonable
         {
             print("Fizzler fizzles");
             Destroy(other.gameObject);
+            aud.Play();
         }
     }
 }

@@ -10,6 +10,7 @@ public class DoorControl : BaseButtonable
     [SerializeField] SpriteRenderer sp;
     [SerializeField] Sprite Open, Closed;
     [SerializeField] string NameOfNextScene;
+    [SerializeField] private AudioSource aud;
 
     #region In-House vars 
     private bool Changed = false;
@@ -23,6 +24,7 @@ public class DoorControl : BaseButtonable
         if(base.Activated == false)
             Changed = true;
         base.Activated = true;
+        aud.Play();
     }
 
     public override void OnDeactivate()

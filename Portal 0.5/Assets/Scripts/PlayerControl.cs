@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
 {
     #region Vars
     private Rigidbody2D rb;
+    private Animator anim;
     [Header("References")]
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject PortalGunPos;
@@ -41,6 +42,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         OGMoveSpeed = MoveSpeed;
         Main = this;
@@ -359,11 +361,15 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             rb.AddForce(new Vector2(MoveSpeed, 0));
+            anim.SetBool("Walking", true);
         }
         else if (Input.GetKey(KeyCode.A))
         {
             rb.AddForce(new Vector2(-MoveSpeed, 0));
+            anim.SetBool("Walking", true);
         }
+        else
+            anim.SetBool("Walking", false);
         #endregion
         //clamp our velocity
         if (rb.velocity.y < 0f)
