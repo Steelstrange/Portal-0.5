@@ -128,10 +128,10 @@ public class Portal : MonoBehaviour
         Vector3 Offset = Vector3.zero;
 
         if (OtherPortal.Direction == "Left")
-            Offset = new Vector3(-.4f, 0, 0);
+            Offset = new Vector3(-.4f, -.68f, 0);
 
         else if (OtherPortal.Direction == "Right")
-            Offset = new Vector3(.4f, 0, 0);
+            Offset = new Vector3(.4f, -.68f, 0);
 
         else if (OtherPortal.Direction == "Up")
             Offset = new Vector3(0, .1f, 0);
